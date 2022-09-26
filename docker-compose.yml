@@ -1,9 +1,11 @@
 services:
   web:
-    image: php:8.0.1-apache
     container_name: apache
     ports:
       - "80:80"
+    build: 
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./src:/var/www/html
     depends_on:
