@@ -1,3 +1,12 @@
+<?php
+$user = null;
+if($user) {
+    echo $user;
+} else {
+    echo 'guest';
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +16,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php require('./includes/nav.php') ?>
-    <h1>Homepage</h1>
+    <?php require('../includes/nav.php') ?>
+    <h1>Admin</h1>
 </body>
 </html>
