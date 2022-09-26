@@ -8,8 +8,6 @@ services:
       - ./src:/var/www/html
     depends_on:
       - db
-    networks:
-      - sucre
 
   pma:
     image: phpmyadmin
@@ -24,8 +22,6 @@ services:
       - "8080:80"
     links:
       - db:db
-    networks:
-      - sucre
 
   db:
     image: mariadb:latest
@@ -39,8 +35,3 @@ services:
       MYSQL_DATABASE: test
       MYSQL_USER: test
       MYSQL_PASSWORD: test
-    networks:
-      - sucre
-networks:
-  sucre:
-    driver: bridge
