@@ -8,6 +8,8 @@ services:
       - ./src:/var/www/html
     depends_on:
       - db
+    networks:
+      - sucre
 
   pma:
     image: phpmyadmin
@@ -16,10 +18,14 @@ services:
       PMA_HOST: db
       PMA_PORT: 3306
       UPLOAD_LIMIT: 1024M
+      MYSQL_ROOT_PASSWORD: root
+      PMA_ARBITRARY: 1
     ports:
-      - "8080:8080"
+      - "8080:80"
     links:
       - db:db
+    networks:
+      - sucre
 
   db:
     image: mariadb:latest
@@ -33,3 +39,8 @@ services:
       MYSQL_DATABASE: test
       MYSQL_USER: test
       MYSQL_PASSWORD: test
+    networks:
+      - sucre
+networks:
+  sucre:
+    driver: bridge
