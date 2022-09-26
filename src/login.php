@@ -8,6 +8,6 @@
 </head>
 <body>
     <?php require('./includes/nav.php') ?>
-    <h1>Homepage</h1>
+    <h1>Login</h1>
 </body>
 </html>
