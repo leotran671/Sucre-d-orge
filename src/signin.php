@@ -1,40 +1,83 @@
 <?php
-$bdd = new PDO('mysql:host=db:3306;dbname=test;charset=utf8;', 'test', 'test');
-if (isset($_POST['forminscription'])) {
-    if (!empty($_POST['mdp']) and !empty($_POST['mail']) and !empty($_POST['mdp2'])) {
-        if ($_POST['mdp2'] == $_POST['mdp']) {
-            if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
-                if (strpos($_POST['mail'], '@my-digital-school.org')) {
-                    $mail = htmlspecialchars($_POST['mail']);
-$mdp = sha1($_POST['mdp']);
-                    $checkmail = $bdd->prepare('SELECT * FROM users where mail = ?');
-                    $checkmail->execute(array($mail));
-                    $mailexist = $checkmail -> rowCount();
-                    if($mailexist==0){
-                        $insertUser = $bdd->prepare('INSERT INTO users(mail,mdp)VALUES(?,?)');
-                        $insertUser->execute(array($mail, $mdp));
-                        $recup_Id_User = $bdd->prepare('SELECT * FROM users where mail = ? AND mdp=?');
-                        $recup_Id_User->execute(array($mail, $mdp));
-                        if ($recup_Id_User->rowCount() > 0) {
-                            $_SESSION['mail'] = $mail;
-                            $_SESSION['mdp'] = $mdp;
-                            $_SESSION['id'] = $recup_Id_User->fetch()['id'];
-                        }
-                    }else{
-                        $erreur = "L'adresse email a déjà été utiliser";
-                    }
-                } else {
-                    $erreur = "Il ne s'agit pas d'une adresse mail de MyDigitalSchool";
-                }
-            } else {
-                $erreur = "Votre email n'est pas valide";
-            }
-        } else {
-            $erreur = "Vous devez écrire le même mot de passe";
-        }
-    } else {
-        $erreur = "Vous devez remplir tous les champs";
+session_start();
+require('./includes/db.php');
+
+if($_SESSION && $_SESSION['user']) header('Location: /');
+
+/**
+ * @param string $email
+ * @return boolean
+ */
+function findEmail($email) {
+    global $bdd;
+    $query = $bdd->prepare('SELECT * FROM users WHERE email = :email');
+    $query->execute([
+        'email' => $email
+    ]);
+    $emailExist = $query->rowCount();
+    if($emailExist !== 0) {
+        return "Email already exist";
     }
+
+    if(!preg_match("/^([\w]*[\w\.]*(?!\.)@my-digital-school.org)/", $email)) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @param string $password
+ * @return string
+ */
+function hashPassword($password) {
+    return md5($password);
+}
+
+/**
+ * @return void
+ */
+function createUser() {
+    global $bdd;
+    $query = $bdd->prepare('INSERT INTO users (email, password) VALUES (:email, :password)');
+    $query->execute([
+        'email' => $_POST['email'],
+        'password' => hashPassword($_POST['password'])
+    ]);
+    $user = $query->fetch();
+}
+
+/**
+ * @return void
+ */
+function handlePost() {
+    if (isset($_POST['email']) && isset($_POST['password'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password_verif = $_POST['password_verif'];
+
+        if($password !== $password_verif) { 
+            echo 'Passwords do not match'; 
+            return;
+        }
+
+        if(empty($email) || empty($password) || empty($password_verif)) {
+            echo 'Veuillez remplir tous les champs';
+            return;
+        }
+
+        if(findEmail($email)) {
+            echo 'Cette adresse mail est déjà utilisée';
+            return;
+        } 
+
+        createUser();
+        header('Location: /login.php');
+    }
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    handlePost();
 }
 ?>
 
@@ -47,6 +90,7 @@ $mdp = sha1($_POST['mdp']);
 </head>
 
 <body>
+    <?php require('./includes/nav.php') ?>
     <form method="POST" action="">
         <table>
             <tr>
@@ -54,7 +98,7 @@ $mdp = sha1($_POST['mdp']);
                     <label for="mail">Mail :</label>
                 </td>
                 <td>
-                    <input type="email" placeholder="Votre mail" id="mail" name="mail" value="
+                    <input type="email" placeholder="Votre mail" id="mail" name="email" value="
                     <?php if (isset($mail)) {
                         echo $mail;
                     } ?>" />
@@ -65,7 +109,7 @@ $mdp = sha1($_POST['mdp']);
                     <label for="mdp">Mot de passe :</label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp" />
+                    <input type="password" placeholder="Votre mot de passe" id="mdp" name="password" />
                 </td>
             </tr>
             <tr>
@@ -73,14 +117,12 @@ $mdp = sha1($_POST['mdp']);
                     <label for="mdp2">Confirmation du mot de passe :</label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" />
+                    <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="password_verif" />
                 </td>
             </tr>
             <tr>
-                <td></td>
                 <td align="center">
-                    <br />
-                    <input type="submit" name="forminscription" value="Je m'inscris" />
+                    <input type="submit" value="Je m'inscris" />
                 </td>
             </tr>
         </table>

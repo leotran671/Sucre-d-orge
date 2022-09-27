@@ -1,3 +1,7 @@
+<?php 
+session_start() 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,5 +13,7 @@
 <body>
     <?php require('./includes/nav.php') ?>
     <h1>Homepage</h1>
+    <?= $_SESSION && $_SESSION['user'] ?  $_SESSION['user']['email'] : 'guest' ?>
+    <?php var_dump($_SESSION) ?>
 </body>
 </html>
