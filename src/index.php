@@ -14,6 +14,7 @@ session_start()
     <?php require('./includes/nav.php') ?>
     <h1>Homepage</h1>
     <?= $_SESSION && $_SESSION['user'] ?  $_SESSION['user']['email'] : 'guest' ?>
-    <?php var_dump($_SESSION) ?>
+    <br>
+    <?= $_SESSION['user']['credit'] ?>
 </body>
 </html>

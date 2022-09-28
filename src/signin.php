@@ -18,12 +18,6 @@ function findEmail($email) {
     if($emailExist !== 0) {
         return "Email already exist";
     }
-
-    if(!preg_match("/^([\w]*[\w\.]*(?!\.)@my-digital-school.org)/", $email)) {
-        return true;
-    }
-
-    return false;
 }
 
 /**
@@ -44,7 +38,6 @@ function createUser() {
         'email' => $_POST['email'],
         'password' => hashPassword($_POST['password'])
     ]);
-    $user = $query->fetch();
 }
 
 /**
@@ -66,11 +59,15 @@ function handlePost() {
             return;
         }
 
+        if(!strpos($email,'my-digital-school.org')){
+            echo 'Vous devez une adresse mail de MyDigitalSchool';
+            return;
+        }
+
         if(findEmail($email)) {
             echo 'Cette adresse mail est déjà utilisée';
             return;
         } 
-
         createUser();
         header('Location: /login.php');
     }
@@ -90,6 +87,74 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+<<<<<<< HEAD
+
+<div class="contenerSnow">
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+    <div class="snow"></div>
+</div>
+
+<div class="cursor"><img src="public/medias/sugarCane.png" width="25" height="30" alt="Sugar Cane"></div>
+=======
+>>>>>>> 3de99a4acd318351aea7f5a5edf67b78754c21a7
     <?php require('./includes/nav.php') ?>
     <form method="POST" action="">
         <table>
