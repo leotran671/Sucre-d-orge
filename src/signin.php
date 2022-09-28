@@ -1,8 +1,9 @@
 <?php
 session_start();
 require('./includes/db.php');
+require('./includes/flash.php');
 
-if($_SESSION && $_SESSION['user']) header('Location: /');
+if($_SESSION && isset($_SESSION['user'])) header('Location: /');
 
 /**
  * @param string $email
@@ -16,11 +17,11 @@ function findEmail($email) {
     ]);
     $emailExist = $query->rowCount();
     if($emailExist !== 0) {
-        return "Email already exist";
+        return flash("Email invalide");
     }
 
     if(!preg_match("/^([\w]*[\w\.]*(?!\.)@my-digital-school.org)/", $email)) {
-        return true;
+        return flash("Email invalide");
     }
 
     return false;
@@ -56,13 +57,11 @@ function handlePost() {
         $password_verif = $_POST['password_verif'];
 
         if($password !== $password_verif) { 
-            echo 'Passwords do not match'; 
-            return;
+            return flash("Les mots de passe ne correspondent pas");
         }
 
         if(empty($email) || empty($password) || empty($password_verif)) {
-            echo 'Veuillez remplir tous les champs';
-            return;
+            return flash("Tous les champs sont obligatoires");
         }
 
         if(!strpos($email,'@my-digital-school.org')){
@@ -71,9 +70,8 @@ function handlePost() {
         }
 
         if(findEmail($email)) {
-            echo 'Cette adresse mail est déjà utilisée';
-            return;
-        }
+            return flash("Email invalide");
+        } 
 
         createUser();
         header('Location: /login.php');
@@ -89,113 +87,54 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 
 <head>
+    <?php require('./includes/head.php') ?>
     <title>Inscription</title>
-    <meta charset="utf-8">
-    <link rel='stylesheet' href='public/style/backgroundSnow.css'>
-    <link rel ='stylesheet' href='public/style/style.css'>
+    <link rel="stylesheet" href="public/style/signin.css">
 </head>
 <body>
-
-<div class="contenerSnow">
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-    <div class="snow"></div>
-</div>
-
-<div class="cursor"><img src="public/medias/sugarCane.png" width="25" height="30" alt="Sugar Cane"></div>
     <?php require('./includes/nav.php') ?>
-    <form id="formularSuscribe" method="POST" action="">
-        <div id="title"><h1>Inscrivez-vous avec votre adresse e-mail</h1></div>
-                
-                    <label for="mail">Quelle est votre adresse e-mail</label>    
-                              
-                    <input class="input" type="email" placeholder="Saisissez votre adresse e-mail" id="mail" name="email" value="
-                    <?php if (isset($mail)) {
-                        echo $mail;
-                    } ?>" />
-                       
-                    <label for="mdp">Créez votre mot de passe</label>
-               
-                    <input class="input" type="password" placeholder="Saisissez votre mot de passe" id="mdp" name="password" />             
-               
-                    <label for="mdp2">Confirmez votre mot de passe</label>
-                              
-                    <input class="input"type="password" placeholder="Saisissez de nouveau votre mot de passe" id="mdp2" name="password_verif" />
-                                  
-                    <input id="submit" type="submit" value="Je m'inscris" />
-                    <p id="test"></p>
-              
-    </form>
-    <?php
-    if (isset($erreur_mdp)) {
-        echo '<font color="red">' . $erreur_mdp;
-    } elseif (isset($erreur)) {
-        echo '<font color="red">' . $erreur;
-    }
-    ?>
+    <form method="POST">
+        <div id="title">
+            <h1>Inscrivez-vous avec votre addresse e-mail</h1>
+        </div>
 
+        <div class="input">
+            <label for="mail">Quelle est votre adresse e-mail</label>              
+            <input type="email" placeholder="Saisissez votre adresse e-mail" id="mail" name="email" value="<?= isset($mail) && $mail ?>" />
+        </div>
+            
+        <div class="input">
+            <label for="mdp">Créez votre mot de passe</label>
+            <input type="password" placeholder="Saisissez votre mot de passe" id="mdp" name="password" />     
+        </div>
+    
+        <div class="input">
+            <label for="mdp_verif">Confirmez votre mot de passe</label>
+            <input type="password" placeholder="Confirmez votre mot de passe" id="mdp_verif" name="password_verif" />
+        </div>
+                        
+        <input id="submit" type="submit" value="Je m'inscris" />              
+    </form>
+
+
+    <div class="alerts">
+        <?php if(isset($_SESSION['flash'])): ?>
+            <?php foreach($_SESSION['flash'] as $flash): ?>
+                <?= "<div class='alert error'>{$flash}</div>" ?>
+            <?php endforeach; ?>
+            <?php unset($_SESSION['flash']) ?>
+        <?php endif ?>
+    </div>
+
+
+    <div class="cursor">
+        <img src="public/medias/sugarCane.png" width="25" height="30" alt="Sugar Cane">
+    </div>
     <script>
     const cursor = document.querySelector('.cursor');
     document.addEventListener('mousemove',e=>{
-    cursor.setAttribute('style','top:'+(e.pageY-4)+"px; left:"+(e.pageX-10)+"px;")
-})
-</script>
+        cursor.setAttribute('style','top:'+(e.pageY-4)+"px; left:"+(e.pageX-10)+"px;")
+    })
+    </script>
 </body>
 </html>

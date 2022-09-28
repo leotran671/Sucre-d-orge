@@ -3,12 +3,20 @@ session_start();
 require('../includes/db.php');
 
 function handlePost(){
-    $data = json_decode(file_get_contents('php://input'), true);
+    global $bdd;
 
-    $id = $data['id'];
+    // check if session email is admin 
+    if($_SESSION['user']['email'] == 'admin.admin@my-digital-school.org'){
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id = $data['id'];
+        $query = $bdd->prepare('DELETE FROM users WHERE id = :id');
+        $query->execute([
+            'id' => $id
+        ]);
 
-    $res = array('local_password' => $_SESSION['user']['password'], 'id' => $data['id']);
-    echo json_encode($res);
+        $res = array('success' => "deleted");
+        echo json_encode($res);
+    }
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {

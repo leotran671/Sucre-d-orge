@@ -1,8 +1,9 @@
 <?php
 session_start();
 require('./includes/db.php');
+require('./includes/flash.php');
 
-if($_SESSION && $_SESSION['user']) header('Location: /');
+if($_SESSION && isset($_SESSION['user'])) header('Location: /');
 
 /**
  * @param string $email
@@ -32,7 +33,7 @@ function handlePost() {
             $_SESSION['user'] = $user;
             header('Location: /');
         } else {
-            echo 'Wrong email or password';
+            return flash("Email ou mot de passe invalide");
         }
     }
 }
@@ -46,43 +47,38 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 
 <head>
+    <?php require('./includes/head.php') ?>
     <title>Inscription</title>
-    <meta charset="utf-8">
+    <link rel="stylesheet" href="public/style/login.css">
 </head>
 
 <body>
     <?php require('./includes/nav.php') ?>
-    <form method="POST" action="">
-        <table>
-            <tr>
-                <td align="right">
-                    <label for="mail">Mail :</label>
-                </td>
-                <td>
-                    <input type="text" placeholder="Votre mail" id="mail" name="email" value="<?= isset($mail) && $mail ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="mdp">Mot de passe :</label>
-                </td>
-                <td>
-                    <input type="password" placeholder="Votre mot de passe" id="mdp" name="password" />
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <input type="submit" value="Connexion" />
-                </td>
-            </tr>
-        </table>
+    <form method="POST">
+        <div id="title">
+            <h1>Inscrivez-vous avec votre addresse e-mail</h1>
+        </div>
+
+        <div class="input">
+            <label for="mail">Email</label>              
+            <input type="email" placeholder="Saisissez votre adresse e-mail" id="mail" name="email" value="<?= isset($mail) && $mail ?>" />
+        </div>
+            
+        <div class="input">
+            <label for="mdp">Mot de passe</label>
+            <input type="password" placeholder="Saisissez votre mot de passe" id="mdp" name="password" />     
+        </div>        
+    
+        <input id="submit" type="submit" value="Je m'inscris" />              
     </form>
-    <?php
-    if (isset($erreur_mdp)) {
-        echo '<font color="red">' . $erreur_mdp;
-    } elseif (isset($erreur)) {
-        echo '<font color="red">' . $erreur;
-    }
-    ?>
+
+    <div class="alerts">
+        <?php if(isset($_SESSION['flash'])): ?>
+            <?php foreach($_SESSION['flash'] as $flash): ?>
+                <?= "<div class='alert error'>{$flash}</div>" ?>
+            <?php endforeach; ?>
+            <?php unset($_SESSION['flash']) ?>
+        <?php endif ?>
+    </div>
 </body>
 </html>

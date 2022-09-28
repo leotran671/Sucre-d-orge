@@ -1,0 +1,169 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@font-face {
+  font-family: "solano_gothic_mvb_bold";
+  src: url("../font/solanogothicmvb-bd-webfont.woff2") format("woff2"), url("../font/solanogothicmvb-bd-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  height: 200vh;
+  padding: 0;
+  font-family: "solano_gothic_mvb_bold";
+  font-size: 1.2rem;
+  color: #333;
+  background-color: #F5F5F5;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  background: none;
+  background-image: url("/public/medias/sucre_4.png"), url("/public/medias/sucre_3.png"), url("/public/medias/sucre_1.png");
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  -webkit-animation: snow 1000s linear infinite;
+          animation: snow 1000s linear infinite;
+}
+@-webkit-keyframes snow {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+  }
+}
+@keyframes snow {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #F5F5F5;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 900;
+  border-bottom: #C4C4C4 solid 1px;
+}
+nav a {
+  color: #111;
+  text-decoration: underline;
+}
+nav a[href^="/"] {
+  text-decoration: none;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+nav ul li {
+  margin-left: 1rem;
+}
+
+.alerts {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+}
+.alerts .alert {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  z-index: 1000;
+  border-radius: 8px;
+  -webkit-animation: fadeOut 5s forwards;
+          animation: fadeOut 5s forwards;
+}
+.alerts .alertsuccess {
+  background-color: #4CAF50;
+  color: white;
+}
+.alerts .alert.error {
+  background-color: #f44336;
+  color: white;
+}
+@-webkit-keyframes fadeOut {
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}/*# sourceMappingURL=global.css.map */
