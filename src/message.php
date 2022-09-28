@@ -4,8 +4,11 @@ require('./includes/db.php');
 
 if(!$_SESSION || !$_SESSION['user']) header('Location: /');
 
-$query = $bdd->query('SELECT id,email FROM users ORDER BY email ASC');
-$destinataires = $query->fetchAll();
+$destinataires = $bdd->query('SELECT id,email FROM users ORDER BY email ASC');
+$destinataires = $destinataires->fetchAll();
+
+$user = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+$user->execute([$_SESSION['user']['id']]);
 
 function getNameFomat($email) {
     $identity = explode("@", $email)[0];
@@ -15,23 +18,30 @@ function getNameFomat($email) {
 }
 
 function handlePost() {
+    global $user;
+    $_POST = array_map("trim", $_POST);
+    $user = $user->fetch();
+    
     try{
-        if(isset($_POST['send'])){
-            if(!empty($_POST['destinataire'])){
-                global $bdd;
-                $tuid = (int) htmlspecialchars($_POST['destinataire']);
-                $message=htmlspecialchars($_POST['message']);
-                $insertMessage = $bdd->prepare("INSERT INTO messages (uid, tid , msg, status) VALUES (?, ?, ?, ?)");
-                $insertMessage->execute([
-                    $_SESSION['user']['id'], 
-                    $tuid, 
-                    $message,
-                    'pending'
-                ]);
-            } 
-        }
+        if($user['credit'] < 1) throw new Exception("Vous n'avez pas assez de crédit pour envoyer un message");
+        if(empty($_POST['destinataire'])) throw new Exception("Veuillez choisir un destinataire");
+        if(empty($_POST['message'])) throw new Exception("Veuillez saisir un message");
+
+        global $bdd;
+        $tuid = (int) htmlspecialchars($_POST['destinataire']);
+        $message = $bdd->prepare("INSERT INTO messages (uid, tid , msg, status) VALUES (:uid, :tid, :msg, :status)");
+        $message->execute([
+            'uid' => $_SESSION['user']['id'],
+            'tid' => $tuid,
+            'msg' => htmlspecialchars($_POST['message']),
+            'status' => 'pending'
+        ]);
+
+        $updateCredit = $bdd->prepare("UPDATE users SET credit = 0 WHERE id = ?");
+        $updateCredit->execute([$_SESSION['user']['id']]);
+        $_SESSION['user']['credit'] = $_SESSION['user']['credit'] = 0;            
     } catch (Exception $e){
-        echo "Vous avez déja envoyé un message";
+        echo $e->getMessage();
     }
 }
 
