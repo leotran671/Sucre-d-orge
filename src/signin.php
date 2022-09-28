@@ -18,6 +18,12 @@ function findEmail($email) {
     if($emailExist !== 0) {
         return "Email already exist";
     }
+
+    if(!preg_match("/^([\w]*[\w\.]*(?!\.)@my-digital-school.org)/", $email)) {
+        return true;
+    }
+
+    return false;
 }
 
 /**
@@ -59,15 +65,11 @@ function handlePost() {
             return;
         }
 
-        if(!strpos($email,'my-digital-school.org')){
-            echo 'Vous devez une adresse mail de MyDigitalSchool';
-            return;
-        }
-
         if(findEmail($email)) {
             echo 'Cette adresse mail est déjà utilisée';
             return;
         } 
+
         createUser();
         header('Location: /login.php');
     }
@@ -84,10 +86,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Inscription</title>
     <meta charset="utf-8">
+    <link rel='stylesheet' href='public/style/backgroundSnow.css'>
+    <link rel ='stylesheet' href='public/style/style.css'>
 </head>
-
 <body>
-<<<<<<< HEAD
 
 <div class="contenerSnow">
     <div class="snow"></div>
@@ -153,44 +155,28 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <div class="cursor"><img src="public/medias/sugarCane.png" width="25" height="30" alt="Sugar Cane"></div>
-=======
->>>>>>> 3de99a4acd318351aea7f5a5edf67b78754c21a7
     <?php require('./includes/nav.php') ?>
-    <form method="POST" action="">
-        <table>
-            <tr>
-                <td align="right">
-                    <label for="mail">Mail :</label>
-                </td>
-                <td>
-                    <input type="email" placeholder="Votre mail" id="mail" name="email" value="
+    <form id="formularSuscribe" method="POST" action="">
+        <div id="title"><h1>Inscrivez-vous avec votre addresse e-mail</h1></div>
+                
+                    <label for="mail">Quelle est votre adresse e-mail</label>    
+                              
+                    <input class="input" type="email" placeholder="Saisissez votre adresse e-mail" id="mail" name="email" value="
                     <?php if (isset($mail)) {
                         echo $mail;
                     } ?>" />
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="mdp">Mot de passe :</label>
-                </td>
-                <td>
-                    <input type="password" placeholder="Votre mot de passe" id="mdp" name="password" />
-                </td>
-            </tr>
-            <tr>
-                <td align="right">
-                    <label for="mdp2">Confirmation du mot de passe :</label>
-                </td>
-                <td>
-                    <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="password_verif" />
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <input type="submit" value="Je m'inscris" />
-                </td>
-            </tr>
-        </table>
+                       
+                    <label for="mdp">Créez votre mot de passe</label>
+               
+                    <input class="input" type="password" placeholder="Saisissez votre mot de passe" id="mdp" name="password" />             
+               
+                    <label for="mdp2">Confirmez votre mot de passe</label>
+                              
+                    <input class="input"type="password" placeholder="Saisissez de nouveau votre mot de passe" id="mdp2" name="password_verif" />
+                                  
+                    <input id="submit" type="submit" value="Je m'inscris" />
+                    <p id="test"></p>
+              
     </form>
     <?php
     if (isset($erreur_mdp)) {
@@ -199,5 +185,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo '<font color="red">' . $erreur;
     }
     ?>
+
+    <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove',e=>{
+    cursor.setAttribute('style','top:'+(e.pageY-4)+"px; left:"+(e.pageX-10)+"px;")
+})
+</script>
 </body>
 </html>
