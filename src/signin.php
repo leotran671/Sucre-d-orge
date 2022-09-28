@@ -162,7 +162,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="cursor"><img src="public/medias/sugarCane.png" width="25" height="30" alt="Sugar Cane"></div>
     <?php require('./includes/nav.php') ?>
     <form id="formularSuscribe" method="POST" action="">
-        <div id="title"><h1>Inscrivez-vous avec votre addresse e-mail</h1></div>
+        <div id="title"><h1>Inscrivez-vous avec votre adresse e-mail</h1></div>
                 
                     <label for="mail">Quelle est votre adresse e-mail</label>    
                               
