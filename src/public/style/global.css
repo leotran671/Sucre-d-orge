@@ -65,14 +65,14 @@ body {
   font-family: "solano_gothic_mvb_bold";
   font-size: 1.2rem;
   color: #333;
-  background-color: #F5F5F5;
+  background-color: #c23616;
   position: relative;
 }
 body::before {
   content: "";
   position: absolute;
   background: none;
-  background-image: url("/public/medias/sucre_4.png"), url("/public/medias/sucre_3.png"), url("/public/medias/sucre_1.png");
+  background-image: url("/public/medias/flocon_1.png"), url("/public/medias/flocon_3.png"), url("/public/medias/flocon_4.png");
   top: 0;
   left: 0;
   width: 100vw;
@@ -96,6 +96,12 @@ body::before {
   100% {
     background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
   }
+}
+
+.cursor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 999;
 }
 
 nav {

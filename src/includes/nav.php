@@ -16,3 +16,13 @@
       <?php endif ?>
    </ul>
 </nav>
+
+<div class="cursor">
+      <img src="public/medias/sugarCane.png" width="25" height="30" alt="Sugar Cane">
+</div>
+<script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove',e=>{
+        cursor.setAttribute('style','top:'+(e.pageY-4)+"px; left:"+(e.pageX-10)+"px;")
+    })
+</script>
