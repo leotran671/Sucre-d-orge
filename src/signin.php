@@ -65,10 +65,15 @@ function handlePost() {
             return;
         }
 
+        if(!strpos($email,'@my-digital-school.org')){
+            echo 'Vous devez utiliser une adresse mail MyDigitalSchool';
+            return;
+        }
+
         if(findEmail($email)) {
             echo 'Cette adresse mail est déjà utilisée';
             return;
-        } 
+        }
 
         createUser();
         header('Location: /login.php');
