@@ -18,12 +18,6 @@ function findEmail($email) {
     if($emailExist !== 0) {
         return "Email already exist";
     }
-
-    if(!preg_match("/^([\w]*[\w\.]*(?!\.)@my-digital-school.org)/", $email)) {
-        return true;
-    }
-
-    return false;
 }
 
 /**
@@ -65,11 +59,15 @@ function handlePost() {
             return;
         }
 
+        if(!strpos($email,'my-digital-school.org')){
+            echo 'Vous devez une adresse mail de MyDigitalSchool';
+            return;
+        }
+
         if(findEmail($email)) {
             echo 'Cette adresse mail est déjà utilisée';
             return;
         } 
-
         createUser();
         header('Location: /login.php');
     }
