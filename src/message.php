@@ -57,9 +57,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
             <label>Destinataire :</label>
                 
             <select name="destinataire" id="destinataire">
-                <?php foreach ($destinataires as $destinataire){ ?>
+                <?php foreach ($destinataires as $destinataire){ 
+                    if($destinataire['id']!=$_SESSION['user']['id']){
+                    ?>
                         <option value="<?= $destinataire['id'] ?>"><?= getNameFomat($destinataire['email']) ?></option>
-                <?php } ?>
+                <?php }} ?>
             </select>
         </div>
         <div>
