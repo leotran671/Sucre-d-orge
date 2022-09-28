@@ -44,7 +44,6 @@ function createUser() {
         'email' => $_POST['email'],
         'password' => hashPassword($_POST['password'])
     ]);
-    $user = $query->fetch();
 }
 
 /**
