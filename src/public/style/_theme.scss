@@ -1,0 +1,43 @@
+// Import Font
+@font-face {
+    font-family: 'solano_gothic_mvb_bold';
+    src: url('../font/solanogothicmvb-bd-webfont.woff2') format('woff2'),
+         url('../font/solanogothicmvb-bd-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Layout Style
+
+body {
+    margin: 0;
+    height: 200vh;
+    padding: 0;
+    font-family: 'solano_gothic_mvb_bold';
+    font-size: 1.2rem;
+    color: #333;
+    background-color: #F5F5F5;
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        background: none;
+        background-image: url("/public/medias/sucre_4.png"),
+            url("/public/medias/sucre_3.png"),
+            url("/public/medias/sucre_1.png");
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; // or 100% for full page
+        z-index: -1;
+        animation: snow 1000s linear infinite;
+        @keyframes snow {
+            0% {
+              background-position: 0px 0px, 0px 0px, 0px 0px;
+            }
+            100% {
+              background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+            }
+        }
+    }
+}

@@ -8,8 +8,8 @@ if($_SESSION['user']['email'] !== "admin.admin@my-digital-school.org") header('L
 $users = $bdd->query('SELECT * FROM users ORDER BY created DESC LIMIT 10');
 $users = $users->fetchAll();
 
-$messages = $bdd->query('SELECT * FROM messages ORDER BY created DESC LIMIT 10');
-$messages = $messages->fetchAll();
+$pendingMessages = $bdd->query('SELECT * FROM messages WHERE status = "pending" ORDER BY created DESC LIMIT 10');
+$pendingMessages = $pendingMessages->fetchAll();
 
 // display datetime in HH:MM le JJ/MM/AAAA
 function formatDate($date) {
@@ -21,18 +21,15 @@ function formatDate($date) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - MyDigitalSucre</title>
 </head>
 <body>
-    <?php require('../includes/nav.php') ?>
     <main>
         <h1 align=center>Dashboard</h1>
         <hr>
+        <a>Tous messages valider</a>        
         <br>
-        <h2>Messages</h2>
+        <h2>Messages en attente</h2>
         <table>
             <thead>
                 <tr>
@@ -43,7 +40,7 @@ function formatDate($date) {
                 </Ftr>
             </thead>
             <tbody>
-                <?php foreach($messages as $message): ?>
+                <?php foreach($pendingMessages as $message): ?>
                     <tr>
                         <td><?= $message['id'] ?></td>
                         <td><?= $message['msg'] ?></td>
@@ -73,7 +70,7 @@ function formatDate($date) {
                         <td align="center"><?= $user['id'] ?></td>
                         <td align="center"><?= $user['email'] ?></td>
                         <td align="center"><?= formatDate($user['created']) ?></td>
-                        <td class="tool"><a href=<?= "/admin/delete.php?" . $user['id'] ?> >Delete</a></td>
+                        <td class="tool"><a href=<?= "/admin/delete.php?" . $user['id'] ?> >Supprimer</a></td>
                     </tr>
                 <?php }; ?>
             </tbody>
