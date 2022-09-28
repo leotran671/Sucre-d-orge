@@ -95,7 +95,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require('./includes/nav.php') ?>
     <form method="POST">
         <div id="title">
-            <h1>Inscrivez-vous avec votre addresse e-mail</h1>
+            <h1>Inscrivez-vous avec votre adresse e-mail</h1>
         </div>
 
         <div class="input">
