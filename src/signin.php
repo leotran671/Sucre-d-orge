@@ -64,6 +64,11 @@ function handlePost() {
             return flash("Tous les champs sont obligatoires");
         }
 
+        if(!strpos($email,'@my-digital-school.org')){
+            echo 'Vous devez utiliser une adresse mail MyDigitalSchool';
+            return;
+        }
+
         if(findEmail($email)) {
             return flash("Email invalide");
         } 
