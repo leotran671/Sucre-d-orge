@@ -28,6 +28,15 @@ nav {
         }
     }
 }
+#white{
+    width:50;
+    height:50;
+    background-color:#F5F5F5;
+}
+#AmongUs{
+    cursor:pointer;
+    visibility:hidden;
+}
 
 .alerts {
     position: fixed;

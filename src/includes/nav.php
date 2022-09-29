@@ -15,4 +15,19 @@
          <li><a <?= $_SERVER['REQUEST_URI'] == "/signin.php" ? "aria-disabled=true" : "href=/signin.php" ?> >Inscription</a></li>
       <?php endif ?>
    </ul>
+   <div id="white"><a href="login.php"><img src="public/medias/AmongUs.png" id="AmongUs" width="50" height="50" alt="Among Us"></a>
+   
+   </div>
+   
 </nav>
+<script>
+   let amongUs = document.querySelector("#AmongUs");
+   let white = document.querySelector("#white");
+   white.addEventListener('mouseover', function(){
+     amongUs.style.visibility="visible";
+   }
+   );
+   white.addEventListener('mouseleave', function(){
+     amongUs.style.visibility="hidden";
+   });
+</script>

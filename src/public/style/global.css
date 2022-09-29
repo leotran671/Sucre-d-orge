@@ -126,6 +126,17 @@ nav ul li {
   margin-left: 1rem;
 }
 
+#white {
+  width: 50;
+  height: 50;
+  background-color: #F5F5F5;
+}
+
+#AmongUs {
+  cursor: pointer;
+  visibility: hidden;
+}
+
 .alerts {
   position: fixed;
   bottom: 1rem;
