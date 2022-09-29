@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <html lang="en">
 <head>
     <?php require('./includes/head.php') ?>
-    <title>Message</title>
+    <title>Envoyer votre message - My Digital Sucre</title>
     <link rel="stylesheet" href="public/style/message.css">
 </head>
 <body>
