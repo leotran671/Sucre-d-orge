@@ -24,11 +24,11 @@ function handlePost() {
     
     try{
         if($user['credit'] < 1) throw new Exception("Vous n'avez pas assez de crédit pour envoyer un message");
-        if(empty($_POST['destinataire'])) throw new Exception("Veuillez choisir un destinataire");
+        $tuid = (int) htmlspecialchars($_POST['destinataire']);
+        if(empty($_POST['destinataire']) || $tuid==0) throw new Exception("Veuillez choisir un destinataire");
         if(empty($_POST['message'])) throw new Exception("Veuillez saisir un message");
 
         global $bdd;
-        $tuid = (int) htmlspecialchars($_POST['destinataire']);
         $message = $bdd->prepare("INSERT INTO messages (uid, tid , msg, status) VALUES (:uid, :tid, :msg, :status)");
         $message->execute([
             'uid' => $_SESSION['user']['id'],
@@ -56,15 +56,19 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 <head>
     <?php require('./includes/head.php') ?>
     <title>Message</title>
+    <link rel="stylesheet" href="public/style/message.css">
 </head>
 <body>
     <?php require('./includes/nav.php') ?>
-    <h1>Message à envoyer</h1>
+    
     <form method="post">
-        <div>
+        <div class="title">
+            <h1>Message à envoyer</h1>
+        </div>
+        <div class="input">
             <label>Destinataire :</label>
-                
             <select name="destinataire" id="destinataire">
+                <option selected>Choisissez le nom de votre utilisateur</option>
                 <?php foreach ($destinataires as $destinataire){ 
                     if($destinataire['id']!=$_SESSION['user']['id']){
                     ?>
@@ -72,10 +76,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
                 <?php }} ?>
             </select>
         </div>
-        <div>
+        <div class="input">
             <label>Message :</label> 
             <div>
-                <textarea cols="30" rows="10" name="message" id="message"></textarea>    
+                <textarea name="message" id="message" maxlength="255" placeholder="Saisissez votre message (max : 255 caractères)"></textarea>    
             </div>
         </div>
         
