@@ -2,7 +2,6 @@ body{
     background:none;
     overflow:hidden;
     color:white;
-    cursor:none;
 }
 
 #backgroundImage{
@@ -12,7 +11,6 @@ body{
     background-image: url("../medias/BackgroundImageSucre.jpg");
     background-size: cover;
     background-position: 70% 25%;
-    pointer-events: none;
     padding:1rem 1rem 1rem 1rem ;
    
     h3{
@@ -32,7 +30,6 @@ body{
         cursor:none;
     }
     button{
-        color:#FF0000;
         font-weight:bold;
         background-color:white;
         width:170px;
@@ -42,6 +39,12 @@ body{
         margin-left:1rem;
         margin-right:1rem;
         font-size:1rem;
+        
+
+        a{
+            text-decoration: none;
+            color:#FF0000;
+        }
     }
 }
 

@@ -16,8 +16,7 @@ session_start()
     <br>
     <h3>Envoyez un message sucré à votre ami(e)</h3>
    <div class="buttons">
-    <button>Connexion</button> <button>S'inscrire</button>
-
+    <button><a href="./login.php">Connexion</a></button> <button > <a href="signin.php">S'inscrire</a></button>
    </div>
     </div>
     

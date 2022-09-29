@@ -98,12 +98,6 @@ body::before {
   }
 }
 
-.cursor {
-  position: absolute;
-  pointer-events: none;
-  z-index: 999;
-}
-
 nav {
   display: flex;
   justify-content: space-between;
