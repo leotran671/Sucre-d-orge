@@ -11,19 +11,12 @@ if($_SESSION && isset($_SESSION['user'])) header('Location: /');
  */
 function findEmail($email) {
     global $bdd;
-    $query = $bdd->prepare('SELECT * FROM users WHERE email = :email');
-    $query->execute([
-        'email' => $email
-    ]);
+    $query = $bdd->prepare('SELECT * FROM users where email = ?');
+    $query->execute(array($email));
     $emailExist = $query->rowCount();
     if($emailExist !== 0) {
-        return flash("Email invalide");
+        return true;
     }
-
-    if(!preg_match("/^([\w]*[\w\.]*(?!\.)@my-digital-school.org)/", $email)) {
-        return flash("Email invalide");
-    }
-
     return false;
 }
 
@@ -68,11 +61,9 @@ function handlePost() {
             echo 'Vous devez utiliser une adresse mail MyDigitalSchool';
             return;
         }
-
-        if(findEmail($email)) {
-            return flash("Email invalide");
-        } 
-
+        if(findEmail($email)==true){
+            return flash("L'adresse mail est déjà dans la base de donnée");
+        }
         createUser();
         header('Location: /login.php');
     }
