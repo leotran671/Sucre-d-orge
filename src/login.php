@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require('./includes/nav.php') ?>
     <form method="POST">
         <div id="title">
-            <h1>Inscrivez-vous avec votre addresse e-mail</h1>
+            <h1>Connexion</h1>
         </div>
 
         <div class="input">
@@ -69,7 +69,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" placeholder="Saisissez votre mot de passe" id="mdp" name="password" />     
         </div>        
     
-        <input id="submit" type="submit" value="Je m'inscris" />              
+        <input id="submit" type="submit" value="Je me connecte" />              
     </form>
 
     <div class="alerts">
