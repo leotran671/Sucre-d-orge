@@ -31,7 +31,7 @@ function handlePost() {
         $user = findUser($email, $password);
         if ($user) {
             $_SESSION['user'] = $user;
-            header('Location: /');
+            header('Location: /message.php');
         } else {
             echo "<audio autoplay><source src='public/medias/sus.mp3'></audio>";
             return flash("Email ou mot de passe invalide ඞ");
@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <?php require('./includes/head.php') ?>
-    <title>Inscription</title>
+    <title>Connexion - My Digital Sucre</title>
     <link rel="stylesheet" href="public/style/login.css">
 </head>
 

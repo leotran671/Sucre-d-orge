@@ -6,7 +6,7 @@ session_start()
 <head>
     <?php require('./includes/head.php') ?>
     <link rel="stylesheet" href="/public/style/index.css">
-    <title>MyDigitalSucre</title>
+    <title>Accueil - My Digital Sucre</title>
 </head>
 <body>
     <?php require('./includes/nav.php') ?>

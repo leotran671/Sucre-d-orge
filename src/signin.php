@@ -79,7 +79,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <?php require('./includes/head.php') ?>
-    <title>Inscription</title>
+    <title>Inscription - My Digital School</title>
     <link rel="stylesheet" href="public/style/signin.css">
 </head>
 <body>
