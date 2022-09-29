@@ -33,6 +33,7 @@ function handlePost() {
             $_SESSION['user'] = $user;
             header('Location: /');
         } else {
+            echo "<audio autoplay><source src='public/medias/sus.mp3'></audio>";
             return flash("Email ou mot de passe invalide");
         }
     }
