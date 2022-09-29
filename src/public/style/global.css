@@ -65,9 +65,8 @@ body {
   font-family: "solano_gothic_mvb_bold";
   font-size: 1.2rem;
   color: #333;
-  background-color: #F8333C;
+  background-color: #c23616;
   position: relative;
-  cursor:none;
 }
 body::before {
   content: "";
@@ -119,7 +118,6 @@ nav {
 }
 nav a {
   color: #111;
-  cursor:none;
   text-decoration: underline;
 }
 nav a[href^="/"] {

@@ -1,0 +1,55 @@
+body {
+  background: none;
+  overflow: hidden;
+  color: white;
+  cursor: none;
+}
+
+#backgroundImage {
+  margin-left: auto;
+  margin-right: auto;
+  height: 90vh;
+  background-image: url("../medias/BackgroundImageSucre.jpg");
+  background-size: cover;
+  background-position: 70% 25%;
+  pointer-events: none;
+  padding: 1rem 1rem 1rem 1rem;
+}
+#backgroundImage h3 {
+  padding-left: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 4rem;
+}
+#backgroundImage .buttons {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  cursor: none;
+}
+#backgroundImage button {
+  color: #FF0000;
+  font-weight: bold;
+  background-color: white;
+  width: 170px;
+  height: 40px;
+  border-radius: 17px;
+  border: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 769px) {
+  h3 {
+    font-size: 2rem;
+    padding-left: 1rem;
+  }
+  button {
+    width: 100px;
+    height: 30px;
+  }
+}/*# sourceMappingURL=index.css.map */
