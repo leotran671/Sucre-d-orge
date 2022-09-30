@@ -49,14 +49,12 @@ nav {
         }
     }
 }
-#white{
-    width:50;
-    height:50;
-    background-color:#F5F5F5;
-}
+
 #AmongUs{
-    cursor:pointer;
-    visibility:hidden;
+    opacity: 0;
+    &:hover{
+        opacity: 1;
+    }
 }
 
 .alerts {

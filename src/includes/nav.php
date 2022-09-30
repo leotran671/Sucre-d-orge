@@ -15,9 +15,7 @@
          <li><a <?= $_SERVER['REQUEST_URI'] == "/signin.php" ? "aria-disabled=true" : "href=/signin.php" ?> >Inscription</a></li>
       <?php endif ?>
    </ul>
-   <div id="white"><a href="login.php"><img src="public/medias/AmongUs.png" id="AmongUs" width="40" height="40" alt="Among Us"></a>
-   
-   </div>
+   <a href="login.php"><img src="public/medias/AmongUs.png" id="AmongUs" width="40" height="40" alt="Among Us"></a>
    
 </nav>
 <script src="./public/js/amongUs.js"></script>
