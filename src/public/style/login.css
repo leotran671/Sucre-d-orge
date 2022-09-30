@@ -33,7 +33,7 @@ form .input {
   margin-bottom: 1rem;
 }
 form .input label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 form .input input {
@@ -52,4 +52,10 @@ form input[type=submit] {
 }
 form input[type=submit]:hover {
   background-color: #aaa;
+}
+
+@media (max-width: 769px) {
+  form {
+    width: 85%;
+  }
 }/*# sourceMappingURL=login.css.map */

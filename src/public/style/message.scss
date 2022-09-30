@@ -32,7 +32,7 @@ form {
         flex-direction: column;
         margin-bottom: 1rem;
         label {
-            font-size: 0.8rem;
+            font-size: 1rem;
             margin-bottom: 0.5rem;
         }
         input {
@@ -41,24 +41,32 @@ form {
             border-radius: 4px;
             font-size: 0.8rem;
         }
-    }
-    input[type="submit"] {
-        padding: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        background-color: #ccc;
-        cursor: pointer;
-        &:hover {
-            background-color: #aaa;
+        input[type="submit"] {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: #ccc;
+            cursor: pointer;
+            &:hover {
+                background-color: #aaa;
+            }
         }
+
     }
+  
     #message{
         display: flex;
         flex-direction: column;
         margin-bottom: 1rem;
         font-size: 0.8rem;
         width: 99.1%;
-        height: 3rem;
+        height: 4rem;
+    }
+}
+
+@media (max-width: 769px) {
+    form{
+        width:85%;
     }
 }

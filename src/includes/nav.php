@@ -16,6 +16,4 @@
       <?php endif ?>
    </ul>
    <a href="login.php"><img src="public/medias/AmongUs.png" id="AmongUs" width="40" height="40" alt="Among Us"></a>
-   
 </nav>
-<script src="./public/js/amongUs.js"></script>
