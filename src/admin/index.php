@@ -27,7 +27,8 @@ function formatDate($date) {
     <main>
         <h1 align=center>Dashboard</h1>
         <hr>
-        <a>Tous messages valider</a>        
+        <a href="/admin/message">Tous messages valider</a>        
+        <?php if($pendingMessages) : ?>
         <br>
         <h2>Messages en attente</h2>
         <table>
@@ -46,14 +47,15 @@ function formatDate($date) {
                         <td><?= $message['msg'] ?></td>
                         <td><?= formatDate($message['created']) ?></td>
                         <td>
-                            <a href="/admin/message.php?id=<?= $message['id'] ?>">Valider</a>
+                            <a data-type="validate" href="/admin/message.php?id=<?= $message['id'] ?>">Valider</a>
                             <br>
-                            <a href="/admin/message.php?id=<?= $message['id'] ?>">Archiver</a>
+                            <a data-type="archived" href="/admin/message.php?id=<?= $message['id'] ?>">Archiver</a>
                         </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
+        <?php endif; ?>
 
         <h2>Utilisateurs</h2>
         <table>
@@ -79,6 +81,40 @@ function formatDate($date) {
 </body>
 </html>
 <script>
+
+// Get all link with data-type
+const links = document.querySelectorAll('a[data-type]');
+links.forEach(link => {
+    link.addEventListener('click', (e) => {
+        if(confirm('Are you sure you want to change state of this message?')) {
+            e.preventDefault();
+            let tr = link.parentElement.parentElement;
+            const type = link.getAttribute('data-type');
+            const id = link.getAttribute('href').split('=')[1];
+            const data = {
+                type,
+                id
+            }
+            fetch('/admin/message.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json().then((data) => {
+                if(data) {
+                    tr.remove();
+                } else {
+                    alert(data.error);
+                }
+            }))
+        }
+    })
+})
+
+
+// Users Delete
 let tools = document.querySelectorAll('.tool a');
 
 tools.forEach(tool => {
@@ -108,15 +144,6 @@ tools.forEach(tool => {
             }))
         }
     })
-})
-
-document.querySelectorAll('.tool a').addEventListener('click', function(e) {
-    const href = e.target.getAttribute('href');
-    e.preventDefault();
-    // alert user before delete
-    if(confirm('Are you sure you want to delete this user?')) {
-        document.location.href = href;
-    }
 })
 </script>
 <style>

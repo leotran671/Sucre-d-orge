@@ -15,7 +15,14 @@
          <li><a <?= $_SERVER['REQUEST_URI'] == "/signin.php" ? "aria-disabled=true" : "href=/signin.php" ?> >Inscription</a></li>
       <?php endif ?>
    </ul>
+<<<<<<< HEAD
    <a href="Easter_Egg.php"><img src="public/medias/AmongUs.png" id="AmongUs" width="40" height="40" alt="Among Us"></a>
    
 </nav>
+=======
+   <a href="login.php" class="Egg">
+      <img src="public/medias/AmongUs.png" width="40" height="40" alt="Among Us">
+   </a>
+   </nav>
+>>>>>>> 47690269c68f91b2aa0d69ab0aed75738361a3bf
 <script src="./public/js/amongUs.js"></script>

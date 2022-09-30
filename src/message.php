@@ -88,12 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <div class="input">
         <label>Message :</label>
         <div>
-                <textarea name="message" id="message" maxlength="255"
+                <textarea name="message" id="message" maxlength="255" style="resize: none;"
                           placeholder="Saisissez votre message (max : 255 caractères)"></textarea>
         </div>
     </div>
 
-    <input type="submit" value="Envoyer Message" name="send" id="send">
+    <input type="submit" id="envoyer" value="Envoyer Message" name="send" id="send">
 </form>
 
 <div class="alerts">
