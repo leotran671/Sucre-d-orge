@@ -58,15 +58,33 @@ table {
   font-weight: normal;
   font-style: normal;
 }
-body {
-  margin: 0;
-  height: 200vh;
-  padding: 0;
-  font-family: "solano_gothic_mvb_bold";
-  font-size: 1.2rem;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  font-family: "solano_gothic_mvb_bold", sans-serif;
   color: #333;
-  background-color: #c23616;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+@media (min-width: 769px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
   position: relative;
+  height: 200vh;
+  margin: 0;
+  padding: 0;
+  background: #c23616;
+  overflow-y: hidden;
 }
 body::before {
   content: "";
@@ -104,7 +122,6 @@ nav {
   align-items: center;
   padding: 1rem;
   background-color: #F5F5F5;
-  color: white;
   font-size: 1.5rem;
   font-weight: bold;
   z-index: 900;
@@ -118,12 +135,35 @@ nav a[href^="/"] {
   text-decoration: none;
 }
 nav ul {
+  width: 100%;
   display: flex;
   list-style: none;
   align-items: center;
 }
 nav ul li {
   margin-left: 1rem;
+}
+nav div {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+nav div p {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: right;
+  background: linear-gradient(to right, #000 50%, rgba(0, 0, 0, 0) 100%);
+  background-size: cover;
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  padding: 0;
+  margin: 0;
+  text-align: right;
 }
 
 #white {
