@@ -50,8 +50,10 @@ nav {
     }
 }
 
-#AmongUs{
+.Egg {
+    display: block;
     opacity: 0;
+    transition: all 200ms;
     &:hover{
         opacity: 1;
     }

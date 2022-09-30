@@ -166,10 +166,12 @@ nav div p {
   text-align: right;
 }
 
-#AmongUs {
+.Egg {
+  display: block;
   opacity: 0;
+  transition: all 200ms;
 }
-#AmongUs:hover {
+.Egg:hover {
   opacity: 1;
 }
 
