@@ -16,6 +16,6 @@ session_start()
     <br>
     <h3>Envoyez un message sucré à votre ami(e)</h3>
   
-    
+
 </body>
 </html>
