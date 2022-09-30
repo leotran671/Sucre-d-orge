@@ -7,7 +7,6 @@ nav {
     align-items: center;
     padding: 1rem;
     background-color: #F5F5F5;
-    color: white;
     font-size: 1.5rem;
     font-weight: bold;
     z-index: 900;
@@ -20,11 +19,33 @@ nav {
         }
     }
     ul {
+        width: 100%;
         display: flex;
         list-style: none;
         align-items: center;
         li {
             margin-left: 1rem;
+        }
+    }
+    div {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        p {
+            display: block;
+            width: fit-content;
+            text-align: right;
+            // make text gradient from left to right (from black to transparent)
+            background: linear-gradient(to right, #000 50%, rgba(0,0,0,0) 100%);
+            background-size: cover;
+            color: #fff;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -moz-background-clip:text;
+            background-clip:text; 
+            padding:0;
+            margin:0;
+            text-align:right;
         }
     }
 }

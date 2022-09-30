@@ -1,3 +1,5 @@
+@import "function";
+
 // Import Font
 @font-face {
     font-family: 'solano_gothic_mvb_bold';
@@ -9,15 +11,31 @@
 
 // Layout Style
 
-body {
-    margin: 0;
-    height: 200vh;
-    padding: 0;
-    font-family: 'solano_gothic_mvb_bold';
-    font-size: 1.2rem;
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    @include desktop {
+        font-size: 14px;
+    }
+    font-family: 'solano_gothic_mvb_bold', sans-serif;
     color: #333;
-    background-color: #c23616;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
     position: relative;
+    height: 200vh;
+    margin: 0;
+    padding: 0;
+    background: #c23616;
+    overflow-y: hidden;
     &::before {
         content: "";
         position: absolute;
